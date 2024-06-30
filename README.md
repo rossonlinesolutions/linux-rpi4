@@ -1,5 +1,4 @@
-Linux kernel
-============
+# Linux kernel for Raspberry Pi 4
 
 There are several guides for kernel developers and users. These guides can
 be rendered in a number of formats, like HTML and PDF. Please read
@@ -13,18 +12,33 @@ In order to build the documentation, use ``make htmldocs`` or
 There are various text files in the Documentation/ subdirectory,
 several of them using the Restructured Text markup notation.
 
-Please read the Documentation/process/changes.rst file, as it contains the
-requirements for building and running the kernel, and information about
-the problems which may result by upgrading your kernel.
+## Setup development workspace
 
-Build status for rpi-5.15.y:
-[![Pi kernel build tests](https://github.com/raspberrypi/linux/actions/workflows/kernel-build.yml/badge.svg?branch=rpi-5.15.y)](https://github.com/raspberrypi/linux/actions/workflows/kernel-build.yml)
-[![dtoverlaycheck](https://github.com/raspberrypi/linux/actions/workflows/dtoverlaycheck.yml/badge.svg?branch=rpi-5.15.y)](https://github.com/raspberrypi/linux/actions/workflows/dtoverlaycheck.yml)
+Clone the repository and install the following packages(ubuntu):
 
-Build status for rpi-6.1.y:
-[![Pi kernel build tests](https://github.com/raspberrypi/linux/actions/workflows/kernel-build.yml/badge.svg?branch=rpi-6.1.y)](https://github.com/raspberrypi/linux/actions/workflows/kernel-build.yml)
-[![dtoverlaycheck](https://github.com/raspberrypi/linux/actions/workflows/dtoverlaycheck.yml/badge.svg?branch=rpi-6.1.y)](https://github.com/raspberrypi/linux/actions/workflows/dtoverlaycheck.yml)
+```
+gcc-aarch64-linux-gnu
+gcc-arm-linux-gnueabihf (optional for 32bit)
+build-essential
+git
+flex
+bison
+bc
+```
 
-Build status for rpi-6.5.y:
-[![Pi kernel build tests](https://github.com/raspberrypi/linux/actions/workflows/kernel-build.yml/badge.svg?branch=rpi-6.5.y)](https://github.com/raspberrypi/linux/actions/workflows/kernel-build.yml)
-[![dtoverlaycheck](https://github.com/raspberrypi/linux/actions/workflows/dtoverlaycheck.yml/badge.svg?branch=rpi-6.5.y)](https://github.com/raspberrypi/linux/actions/workflows/dtoverlaycheck.yml)
+And setup the environment variables:
+
+```bash
+export ARCH=arm64 #for 32bit, set instead ARCH=arm
+export CROSS_COMPILE=aarch64-linux-gnu- #for 32bit, set instread CROSS_COMPILE=arm-linux-gnueabihf-
+export DTS_SUBDIR=broadcom
+export IMAGE=Image.gz
+```
+
+To build the kernel, just run:
+
+```bash
+make bcm2711_defconfig
+# Replace $JOB_COUNT for the number of jobs to build the kernel
+make -j $JOB_COUNT
+```
