@@ -2,13 +2,59 @@ name: Pi kernel build tests
 
 on:
   pull_request:
-    paths-ignore:
-      - '.github/**'
-    branches: [ "rpi-*" ]
+    paths:
+      - 'arch/**'
+      - 'block/**'
+      - 'certs/**'
+      - 'crypto/**'
+      - 'drivers/**'
+      - 'fs/**'
+      - 'include/**'
+      - 'init/**'
+      - 'io_uring/**'
+      - 'ipc/**'
+      - 'kernel/**'
+      - 'lib/**'
+      - 'mm/**'
+      - 'net/**'
+      - 'rust/**'
+      - 'scripts/**'
+      - 'security/**'
+      - 'sound/**'
+      - 'tools/**'
+      - 'usr/**'
+      - 'virt/**'
+      - 'Kbuild'
+      - 'Kconfig'
+      - 'Makefile'
+    branches: [ "main" ]
   push:
-    paths-ignore:
-      - '.github/**'
-    branches: [ "rpi-*" ]
+    paths:
+      - 'arch/**'
+      - 'block/**'
+      - 'certs/**'
+      - 'crypto/**'
+      - 'drivers/**'
+      - 'fs/**'
+      - 'include/**'
+      - 'init/**'
+      - 'io_uring/**'
+      - 'ipc/**'
+      - 'kernel/**'
+      - 'lib/**'
+      - 'mm/**'
+      - 'net/**'
+      - 'rust/**'
+      - 'scripts/**'
+      - 'security/**'
+      - 'sound/**'
+      - 'tools/**'
+      - 'usr/**'
+      - 'virt/**'
+      - 'Kbuild'
+      - 'Kconfig'
+      - 'Makefile'
+    branches: [ "main" ]
   workflow_dispatch:
 
 env:
@@ -96,13 +142,3 @@ jobs:
         cp ${{github.workspace}}/build/arch/${ARCH}/boot/dts/overlays/*.dtb* ${{github.workspace}}/install/boot/overlays/
         cp ${{github.workspace}}/arch/${ARCH}/boot/dts/overlays/README ${{github.workspace}}/install/boot/overlays/
         cp ${{github.workspace}}/build/arch/${ARCH}/boot/$IMAGE ${{github.workspace}}/install/boot/${{matrix.kernel}}.img
-
-    - name: Tar build
-      run: tar -cvf ${{matrix.name}}_build.tar -C ${{github.workspace}}/install .
-
-    - name: Upload results
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{matrix.name}}_build
-        path: ${{matrix.name}}_build.tar
-        retention-days: 90

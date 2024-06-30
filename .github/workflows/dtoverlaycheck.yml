@@ -2,13 +2,59 @@ name: Pi dtoverlay checks
 
 on:
   pull_request:
-    paths-ignore:
-      - '.github/**'
-    branches: [ "rpi-*" ]
+    paths:
+      - 'arch/**'
+      - 'block/**'
+      - 'certs/**'
+      - 'crypto/**'
+      - 'drivers/**'
+      - 'fs/**'
+      - 'include/**'
+      - 'init/**'
+      - 'io_uring/**'
+      - 'ipc/**'
+      - 'kernel/**'
+      - 'lib/**'
+      - 'mm/**'
+      - 'net/**'
+      - 'rust/**'
+      - 'scripts/**'
+      - 'security/**'
+      - 'sound/**'
+      - 'tools/**'
+      - 'usr/**'
+      - 'virt/**'
+      - 'Kbuild'
+      - 'Kconfig'
+      - 'Makefile'
+    branches: [ "main" ]
   push:
-    paths-ignore:
-      - '.github/**'
-    branches: [ "rpi-*" ]
+    paths:
+      - 'arch/**'
+      - 'block/**'
+      - 'certs/**'
+      - 'crypto/**'
+      - 'drivers/**'
+      - 'fs/**'
+      - 'include/**'
+      - 'init/**'
+      - 'io_uring/**'
+      - 'ipc/**'
+      - 'kernel/**'
+      - 'lib/**'
+      - 'mm/**'
+      - 'net/**'
+      - 'rust/**'
+      - 'scripts/**'
+      - 'security/**'
+      - 'sound/**'
+      - 'tools/**'
+      - 'usr/**'
+      - 'virt/**'
+      - 'Kbuild'
+      - 'Kconfig'
+      - 'Makefile'
+    branches: [ "main" ]
   workflow_dispatch:
 
 env:
